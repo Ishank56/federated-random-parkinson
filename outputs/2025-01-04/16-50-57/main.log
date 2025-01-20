@@ -1,0 +1,26 @@
+[2025-01-04 16:50:58,048][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-01-04 16:50:58,057][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2025-01-04 16:51:07,308][flwr][INFO] - Flower VCE: Ray initialized with resources: {'object_store_memory': 80631398.0, 'CPU': 12.0, 'accelerator_type:G': 1.0, 'node:127.0.0.1': 1.0, 'GPU': 1.0, 'node:__internal_head__': 1.0, 'memory': 161262798.0}
+[2025-01-04 16:51:07,311][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-01-04 16:51:07,311][flwr][INFO] - No `client_resources` specified. Using minimal resources for clients.
+[2025-01-04 16:51:07,312][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2025-01-04 16:51:07,504][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 12 actors
+[2025-01-04 16:51:07,506][flwr][INFO] - [INIT]
+[2025-01-04 16:51:07,506][flwr][INFO] - Requesting initial parameters from one random client
+[2025-01-04 16:51:29,395][flwr][INFO] - Received initial parameters from one random client
+[2025-01-04 16:51:29,399][flwr][INFO] - Starting evaluation of initial global parameters
+[2025-01-04 16:52:07,236][flwr][INFO] - initial parameters (loss, other metrics): 1151.607926607132, {'accuracy': 0.13913333333333333}
+[2025-01-04 16:52:07,328][flwr][INFO] - 
+[2025-01-04 16:52:07,330][flwr][INFO] - [ROUND 1]
+[2025-01-04 16:52:07,445][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 100)

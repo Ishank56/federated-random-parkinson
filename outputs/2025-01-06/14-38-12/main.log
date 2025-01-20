@@ -1,0 +1,136 @@
+[2025-01-06 14:38:12,796][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-01-06 14:38:12,801][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2025-01-06 14:38:19,247][flwr][INFO] - Flower VCE: Ray initialized with resources: {'GPU': 1.0, 'node:127.0.0.1': 1.0, 'memory': 235138254.0, 'accelerator_type:G': 1.0, 'object_store_memory': 117569126.0, 'CPU': 12.0, 'node:__internal_head__': 1.0}
+[2025-01-06 14:38:19,248][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-01-06 14:38:19,248][flwr][INFO] - No `client_resources` specified. Using minimal resources for clients.
+[2025-01-06 14:38:19,248][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2025-01-06 14:38:19,266][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 12 actors
+[2025-01-06 14:38:19,267][flwr][INFO] - [INIT]
+[2025-01-06 14:38:19,268][flwr][INFO] - Requesting initial parameters from one random client
+[2025-01-06 14:38:30,775][flwr][INFO] - Received initial parameters from one random client
+[2025-01-06 14:38:30,776][flwr][INFO] - Starting evaluation of initial global parameters
+[2025-01-06 14:38:40,606][flwr][INFO] - initial parameters (loss, other metrics): 1151.1366584300995, {'accuracy': 0.0959}
+[2025-01-06 14:38:40,607][flwr][INFO] - 
+[2025-01-06 14:38:40,608][flwr][INFO] - [ROUND 1]
+[2025-01-06 14:38:40,614][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 100)
+[2025-01-06 14:39:52,463][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=10512, ip=127.0.0.1, actor_id=48e28f64cfa066f83642418501000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B4A4C744C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 30, in train
+    net.to(device)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1340, in to
+    return self._apply(convert)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 900, in _apply
+    module._apply(fn)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 927, in _apply
+    param_applied = fn(param)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1326, in convert
+    return t.to(
+RuntimeError: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10512, ip=127.0.0.1, actor_id=48e28f64cfa066f83642418501000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B4A4C744C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2025-01-06 14:39:53,098][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=10512, ip=127.0.0.1, actor_id=48e28f64cfa066f83642418501000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B4A4C744C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 30, in train
+    net.to(device)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1340, in to
+    return self._apply(convert)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 900, in _apply
+    module._apply(fn)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 927, in _apply
+    param_applied = fn(param)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1326, in convert
+    return t.to(
+RuntimeError: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10512, ip=127.0.0.1, actor_id=48e28f64cfa066f83642418501000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B4A4C744C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.

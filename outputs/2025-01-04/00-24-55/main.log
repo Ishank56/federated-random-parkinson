@@ -1,0 +1,186 @@
+[2025-01-04 00:24:55,718][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-01-04 00:24:55,729][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2025-01-04 00:25:07,754][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 256627508.0, 'GPU': 1.0, 'object_store_memory': 128313753.0, 'accelerator_type:G': 1.0, 'CPU': 12.0, 'node:127.0.0.1': 1.0, 'node:__internal_head__': 1.0}
+[2025-01-04 00:25:07,762][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-01-04 00:25:07,763][flwr][INFO] - No `client_resources` specified. Using minimal resources for clients.
+[2025-01-04 00:25:07,764][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2025-01-04 00:25:07,794][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 12 actors
+[2025-01-04 00:25:07,795][flwr][INFO] - [INIT]
+[2025-01-04 00:25:07,796][flwr][INFO] - Requesting initial parameters from one random client
+[2025-01-04 00:25:33,287][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 77, in client_fn
+    return FlowerClient(trainloader=trainloaders[int(cid)],
+TypeError: __init__() got an unexpected keyword argument 'num_classes'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: __init__() got an unexpected keyword argument 'num_classes'
+
+[2025-01-04 00:25:33,308][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 77, in client_fn
+    return FlowerClient(trainloader=trainloaders[int(cid)],
+TypeError: __init__() got an unexpected keyword argument 'num_classes'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: __init__() got an unexpected keyword argument 'num_classes'
+[2025-01-04 00:25:33,317][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 77, in client_fn
+    return FlowerClient(trainloader=trainloaders[int(cid)],
+TypeError: __init__() got an unexpected keyword argument 'num_classes'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: __init__() got an unexpected keyword argument 'num_classes'
+[2025-01-04 00:25:33,352][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\legacy_app.py", line 359, in start_simulation
+    hist = run_fl(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\server\server.py", line 492, in run_fl
+    hist, elapsed_time = server.fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\server\server.py", line 93, in fit
+    self.parameters = self._get_initial_parameters(server_round=0, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\server\server.py", line 284, in _get_initial_parameters
+    get_parameters_res = random_client.get_parameters(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 168, in get_parameters
+    message_out = self._submit_job(message, timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 108, in _submit_job
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 96, in handle_legacy_message_from_msgtype
+    client = client_fn(context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 67, in adaptor_fn
+    return client_fn(str(cid))  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 77, in client_fn
+    return FlowerClient(trainloader=trainloaders[int(cid)],
+TypeError: __init__() got an unexpected keyword argument 'num_classes'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=15880, ip=127.0.0.1, actor_id=3b1b6f692e8f2edefa89eb9001000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000260FBB64400>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: __init__() got an unexpected keyword argument 'num_classes'
+
+[2025-01-04 00:25:33,367][flwr][ERROR] - Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 1, 'num_gpus': 0.0} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 1, 'num_gpus': 0.0}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.

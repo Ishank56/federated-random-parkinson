@@ -1,0 +1,1961 @@
+[2025-01-04 01:01:04,070][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-01-04 01:01:04,076][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2025-01-04 01:01:11,100][flwr][INFO] - Flower VCE: Ray initialized with resources: {'GPU': 1.0, 'memory': 272085812.0, 'node:127.0.0.1': 1.0, 'accelerator_type:G': 1.0, 'node:__internal_head__': 1.0, 'CPU': 12.0, 'object_store_memory': 136042905.0}
+[2025-01-04 01:01:11,102][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-01-04 01:01:11,103][flwr][INFO] - No `client_resources` specified. Using minimal resources for clients.
+[2025-01-04 01:01:11,103][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2025-01-04 01:01:11,131][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 12 actors
+[2025-01-04 01:01:11,135][flwr][INFO] - [INIT]
+[2025-01-04 01:01:11,135][flwr][INFO] - Requesting initial parameters from one random client
+[2025-01-04 01:01:29,257][flwr][INFO] - Received initial parameters from one random client
+[2025-01-04 01:01:29,266][flwr][INFO] - Starting evaluation of initial global parameters
+[2025-01-04 01:01:43,853][flwr][INFO] - initial parameters (loss, other metrics): 1151.2060570716858, {'accuracy': 0.09553333333333333}
+[2025-01-04 01:01:43,854][flwr][INFO] - 
+[2025-01-04 01:01:43,855][flwr][INFO] - [ROUND 1]
+[2025-01-04 01:01:43,864][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 100)
+[2025-01-04 01:02:02,660][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,671][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,771][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,774][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,799][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,799][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,799][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,800][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,804][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,805][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,816][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,823][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,829][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,835][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17016, ip=127.0.0.1, actor_id=479bcd61c3a6798422f0924a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001C39342D340>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,840][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24256, ip=127.0.0.1, actor_id=22ada228ea21e34fb7cebf1101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002D572E544C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,847][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:02,908][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:02,915][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:06,927][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:02:06,938][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:02:06,950][flwr][INFO] - aggregate_fit: received 0 results and 10 failures
+[2025-01-04 01:02:26,428][flwr][INFO] - fit progress: (1, 1151.2060570716858, {'accuracy': 0.09553333333333333}, 42.5732)
+[2025-01-04 01:02:26,436][flwr][INFO] - configure_evaluate: strategy sampled 25 clients (out of 100)
+[2025-01-04 01:06:03,281][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 135, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 244, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 251, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 67, in evaluate
+    loss, accuracy= test(self.model, self.valloader, self.device)
+  File "D:\federated Parkinsons\model.py", line 44, in test
+    net.to(device)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1340, in to
+    return self._apply(convert)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 900, in _apply
+    module._apply(fn)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 927, in _apply
+    param_applied = fn(param)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1326, in convert
+    return t.to(
+RuntimeError: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[2025-01-04 01:06:03,311][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 135, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 244, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 251, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 67, in evaluate
+    loss, accuracy= test(self.model, self.valloader, self.device)
+  File "D:\federated Parkinsons\model.py", line 44, in test
+    net.to(device)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1340, in to
+    return self._apply(convert)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 900, in _apply
+    module._apply(fn)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 927, in _apply
+    param_applied = fn(param)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\nn\modules\module.py", line 1326, in convert
+    return t.to(
+RuntimeError: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19700, ip=127.0.0.1, actor_id=98241b2fb4c40869dfacbd3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000018F9FCA4430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: CUDA error: CUDA-capable device(s) is/are busy or unavailable
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+[2025-01-04 01:06:03,836][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13064, ip=127.0.0.1, actor_id=b8659eef9883fae69d40258401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022B0AD33490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13064, ip=127.0.0.1, actor_id=b8659eef9883fae69d40258401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022B0AD33490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 135, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 244, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 251, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 67, in evaluate
+    loss, accuracy= test(self.model, self.valloader, self.device)
+  File "D:\federated Parkinsons\model.py", line 46, in test
+    for data in testloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 12360, 26868) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13064, ip=127.0.0.1, actor_id=b8659eef9883fae69d40258401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022B0AD33490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 12360, 26868) exited unexpectedly
+
+[2025-01-04 01:06:03,856][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13064, ip=127.0.0.1, actor_id=b8659eef9883fae69d40258401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022B0AD33490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13064, ip=127.0.0.1, actor_id=b8659eef9883fae69d40258401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022B0AD33490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 135, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 244, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 251, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 67, in evaluate
+    loss, accuracy= test(self.model, self.valloader, self.device)
+  File "D:\federated Parkinsons\model.py", line 46, in test
+    for data in testloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 12360, 26868) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13064, ip=127.0.0.1, actor_id=b8659eef9883fae69d40258401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022B0AD33490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 12360, 26868) exited unexpectedly
+[2025-01-04 01:06:49,800][flwr][ERROR] - The actor d25d00f371cda861c259408901000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:06:50,640][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:06:51,088][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=18576, ip=127.0.0.1, actor_id=73d47d219872243146aa427101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E381C544C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=18576, ip=127.0.0.1, actor_id=73d47d219872243146aa427101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E381C544C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 135, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 244, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 251, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 67, in evaluate
+    loss, accuracy= test(self.model, self.valloader, self.device)
+  File "D:\federated Parkinsons\model.py", line 46, in test
+    for data in testloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 2616) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=18576, ip=127.0.0.1, actor_id=73d47d219872243146aa427101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E381C544C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 2616) exited unexpectedly
+
+[2025-01-04 01:06:51,118][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:06:51,228][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=18576, ip=127.0.0.1, actor_id=73d47d219872243146aa427101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E381C544C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=18576, ip=127.0.0.1, actor_id=73d47d219872243146aa427101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E381C544C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 135, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 244, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 251, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 67, in evaluate
+    loss, accuracy= test(self.model, self.valloader, self.device)
+  File "D:\federated Parkinsons\model.py", line 46, in test
+    for data in testloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 2616) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=18576, ip=127.0.0.1, actor_id=73d47d219872243146aa427101000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E381C544C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 2616) exited unexpectedly
+[2025-01-04 01:06:51,272][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:06:51,290][flwr][WARNING] - Actor(d25d00f371cda861c259408901000000) will be remove from pool.
+[2025-01-04 01:06:51,292][flwr][WARNING] - REMOVED actor d25d00f371cda861c259408901000000 from pool
+[2025-01-04 01:06:51,292][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorUnavailableError: The actor d25d00f371cda861c259408901000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+
+[2025-01-04 01:06:51,293][flwr][WARNING] - Pool size: 11
+[2025-01-04 01:06:51,297][flwr][ERROR] - The actor d25d00f371cda861c259408901000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:06:51,465][flwr][WARNING] - Actor(d25d00f371cda861c259408901000000) will be remove from pool.
+[2025-01-04 01:06:51,748][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorDiedError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+
+[2025-01-04 01:06:51,754][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:07:29,011][flwr][INFO] - The cluster expanded. Adding 1 actors to the pool.
+[2025-01-04 01:07:37,089][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: b8659eef9883fae69d40258401000000
+	pid: 13064
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:07:39,223][flwr][WARNING] - Actor(d25d00f371cda861c259408901000000) will be remove from pool.
+[2025-01-04 01:07:39,355][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorDiedError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+
+[2025-01-04 01:07:39,364][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:07:39,545][flwr][WARNING] - Actor(b8659eef9883fae69d40258401000000) will be remove from pool.
+[2025-01-04 01:07:39,548][flwr][WARNING] - Actor(d25d00f371cda861c259408901000000) will be remove from pool.
+[2025-01-04 01:07:39,549][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorDiedError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: b8659eef9883fae69d40258401000000
+	pid: 13064
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+
+[2025-01-04 01:07:39,551][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorDiedError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+
+[2025-01-04 01:07:39,556][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: b8659eef9883fae69d40258401000000
+	pid: 13064
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:07:39,556][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: b8659eef9883fae69d40258401000000
+	pid: 13064
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:07:39,562][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: d25d00f371cda861c259408901000000
+	pid: 22864
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:07:39,564][flwr][WARNING] - Actor(b8659eef9883fae69d40258401000000) will be remove from pool.
+[2025-01-04 01:07:39,568][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorDiedError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: b8659eef9883fae69d40258401000000
+	pid: 13064
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+
+[2025-01-04 01:07:39,574][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: b8659eef9883fae69d40258401000000
+	pid: 13064
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:08:22,038][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2749, in get
+    raise ValueError(
+ValueError: Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+
+[2025-01-04 01:08:22,057][flwr][ERROR] - Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+[2025-01-04 01:08:22,075][flwr][INFO] - aggregate_evaluate: received 15 results and 10 failures
+[2025-01-04 01:08:22,077][flwr][WARNING] - No evaluate_metrics_aggregation_fn provided
+[2025-01-04 01:08:22,078][flwr][INFO] - 
+[2025-01-04 01:08:22,078][flwr][INFO] - [ROUND 2]
+[2025-01-04 01:08:22,082][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 100)
+[2025-01-04 01:08:25,110][flwr][WARNING] - REMOVED actor b8659eef9883fae69d40258401000000 from pool
+[2025-01-04 01:08:25,111][flwr][WARNING] - Pool size: 11
+[2025-01-04 01:08:26,405][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=11568, ip=127.0.0.1, actor_id=b606f18da5fab93956d4b4b201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000206A7534550>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=11568, ip=127.0.0.1, actor_id=b606f18da5fab93956d4b4b201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000206A7534550>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:08:26,412][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:08:26,414][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:08:26,417][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=11568, ip=127.0.0.1, actor_id=b606f18da5fab93956d4b4b201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000206A7534550>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=11568, ip=127.0.0.1, actor_id=b606f18da5fab93956d4b4b201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000206A7534550>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:08:26,428][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=23688, ip=127.0.0.1, actor_id=c8cdb963092bef31ae03f6c301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001AA40153490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:08:26,448][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10608, ip=127.0.0.1, actor_id=1f88d09fecfb81f12303bf0e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000022DC4C43460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:08:33,352][flwr][INFO] - The cluster expanded. Adding 1 actors to the pool.
+[2025-01-04 01:08:35,556][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=6476, ip=127.0.0.1, actor_id=e740c04078e22031a8a1fd4c01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000012C69B514F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=6476, ip=127.0.0.1, actor_id=e740c04078e22031a8a1fd4c01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000012C69B514F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:08:35,559][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=8020, ip=127.0.0.1, actor_id=b068224f2a97ad717a7c36d301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E8C3A03430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=8020, ip=127.0.0.1, actor_id=b068224f2a97ad717a7c36d301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E8C3A03430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+
+[2025-01-04 01:08:35,582][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=6476, ip=127.0.0.1, actor_id=e740c04078e22031a8a1fd4c01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000012C69B514F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=6476, ip=127.0.0.1, actor_id=e740c04078e22031a8a1fd4c01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000012C69B514F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:08:35,593][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=8020, ip=127.0.0.1, actor_id=b068224f2a97ad717a7c36d301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E8C3A03430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 50, in fit
+    model.set_parameters(parameters)
+NameError: name 'model' is not defined
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=8020, ip=127.0.0.1, actor_id=b068224f2a97ad717a7c36d301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001E8C3A03430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: name 'model' is not defined
+[2025-01-04 01:18:05,653][flwr][ERROR] - The actor 22ada228ea21e34fb7cebf1101000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:18:05,658][flwr][ERROR] - The actor 98241b2fb4c40869dfacbd3f01000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:18:19,573][flwr][WARNING] - Actor(22ada228ea21e34fb7cebf1101000000) will be remove from pool.
+[2025-01-04 01:18:19,590][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorUnavailableError: The actor 22ada228ea21e34fb7cebf1101000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+
+[2025-01-04 01:18:19,592][flwr][ERROR] - The actor 22ada228ea21e34fb7cebf1101000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:18:19,596][flwr][WARNING] - Actor(98241b2fb4c40869dfacbd3f01000000) will be remove from pool.
+[2025-01-04 01:18:19,599][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorUnavailableError: The actor 98241b2fb4c40869dfacbd3f01000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+
+[2025-01-04 01:18:19,600][flwr][ERROR] - The actor 98241b2fb4c40869dfacbd3f01000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:18:21,021][flwr][ERROR] - The actor 73d47d219872243146aa427101000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:18:21,021][flwr][WARNING] - Actor(73d47d219872243146aa427101000000) will be remove from pool.
+[2025-01-04 01:18:21,022][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorUnavailableError: The actor 73d47d219872243146aa427101000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+
+[2025-01-04 01:18:21,022][flwr][ERROR] - The actor 73d47d219872243146aa427101000000 is unavailable: The actor is temporarily unavailable: RpcError: RPC Error message: Connection reset; RPC Error details: . The task may or maynot have been executed on the actor.
+[2025-01-04 01:18:21,026][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 479bcd61c3a6798422f0924a01000000
+	pid: 17016
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:18:21,027][flwr][WARNING] - Actor(479bcd61c3a6798422f0924a01000000) will be remove from pool.
+[2025-01-04 01:18:21,028][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 289, in _fetch_future_result
+    raise ex
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 908, in get_objects
+    raise value
+ray.exceptions.ActorDiedError: The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 479bcd61c3a6798422f0924a01000000
+	pid: 17016
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+
+[2025-01-04 01:18:21,028][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2749, in get
+    raise ValueError(
+ValueError: Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+
+[2025-01-04 01:18:21,028][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: 479bcd61c3a6798422f0924a01000000
+	pid: 17016
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:18:21,029][flwr][ERROR] - Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+[2025-01-04 01:18:21,031][flwr][INFO] - aggregate_fit: received 0 results and 10 failures
+[2025-01-04 01:18:40,824][flwr][INFO] - fit progress: (2, 1151.2060570716858, {'accuracy': 0.09553333333333333}, 1016.9687069)
+[2025-01-04 01:18:40,825][flwr][INFO] - configure_evaluate: strategy sampled 25 clients (out of 100)
+[2025-01-04 01:18:40,831][flwr][WARNING] - REMOVED actor 479bcd61c3a6798422f0924a01000000 from pool
+[2025-01-04 01:18:40,832][flwr][WARNING] - Pool size: 11
+[2025-01-04 01:18:40,837][flwr][WARNING] - REMOVED actor 73d47d219872243146aa427101000000 from pool
+[2025-01-04 01:18:40,838][flwr][WARNING] - Pool size: 10
+[2025-01-04 01:18:40,840][flwr][WARNING] - REMOVED actor 98241b2fb4c40869dfacbd3f01000000 from pool
+[2025-01-04 01:18:40,842][flwr][WARNING] - Pool size: 9
+[2025-01-04 01:18:40,842][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2749, in get
+    raise ValueError(
+ValueError: Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+
+[2025-01-04 01:18:40,844][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2749, in get
+    raise ValueError(
+ValueError: Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+
+[2025-01-04 01:18:40,845][flwr][WARNING] - REMOVED actor 22ada228ea21e34fb7cebf1101000000 from pool
+[2025-01-04 01:18:40,846][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2749, in get
+    raise ValueError(
+ValueError: Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+
+[2025-01-04 01:18:40,847][flwr][ERROR] - Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+[2025-01-04 01:18:40,849][flwr][ERROR] - Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+[2025-01-04 01:18:40,849][flwr][WARNING] - Pool size: 8
+[2025-01-04 01:18:40,851][flwr][ERROR] - Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+[2025-01-04 01:18:40,855][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2749, in get
+    raise ValueError(
+ValueError: Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+
+[2025-01-04 01:18:41,164][flwr][ERROR] - Invalid type of object refs, <class 'NoneType'>, is given. 'object_refs' must either be an ObjectRef or a list of ObjectRefs. 
+[2025-01-04 01:18:41,998][flwr][ERROR] - The actor died unexpectedly before finishing this task.
+	class_name: ClientAppActor
+	actor_id: e740c04078e22031a8a1fd4c01000000
+	pid: 6476
+	namespace: 2ce3a233-0150-4829-952f-f5cc462af958
+	ip: 127.0.0.1
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 10054. An existing connection was forcibly closed by the remote host. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+[2025-01-04 01:18:49,632][flwr][INFO] - The cluster expanded. Adding 4 actors to the pool.

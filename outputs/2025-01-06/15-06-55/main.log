@@ -1,0 +1,53 @@
+[2025-01-06 15:06:56,060][flwr][WARNING] - 
+Setting `min_available_clients` lower than `min_fit_clients` or
+`min_evaluate_clients` can cause the server to fail when there are too few clients
+connected to the server. `min_available_clients` must be set to a value larger
+than or equal to the values of `min_fit_clients` and `min_evaluate_clients`.
+
+[2025-01-06 15:06:56,061][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-01-06 15:06:56,065][flwr][INFO] - Starting Flower simulation, config: num_rounds=2, no round_timeout
+[2025-01-06 15:06:59,608][flwr][INFO] - Flower VCE: Ray initialized with resources: {'CPU': 12.0, 'object_store_memory': 761107660.0, 'memory': 1522215323.0, 'GPU': 1.0, 'node:127.0.0.1': 1.0, 'node:__internal_head__': 1.0, 'accelerator_type:G': 1.0}
+[2025-01-06 15:06:59,608][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-01-06 15:06:59,609][flwr][INFO] - No `client_resources` specified. Using minimal resources for clients.
+[2025-01-06 15:06:59,609][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2025-01-06 15:06:59,624][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 12 actors
+[2025-01-06 15:06:59,625][flwr][INFO] - [INIT]
+[2025-01-06 15:06:59,625][flwr][INFO] - Requesting initial parameters from one random client
+[2025-01-06 15:07:08,184][flwr][INFO] - Received initial parameters from one random client
+[2025-01-06 15:07:08,185][flwr][INFO] - Starting evaluation of initial global parameters
+[2025-01-06 15:07:16,982][flwr][INFO] - initial parameters (loss, other metrics): 1152.8528850078583, {'accuracy': 0.098}
+[2025-01-06 15:07:16,983][flwr][INFO] - 
+[2025-01-06 15:07:16,983][flwr][INFO] - [ROUND 1]
+[2025-01-06 15:07:16,986][flwr][INFO] - Sampling failed: number of available clients (2) is less than number of requested clients (10).
+[2025-01-06 15:07:16,987][flwr][INFO] - configure_fit: no clients selected, cancel
+[2025-01-06 15:07:27,202][flwr][INFO] - fit progress: (1, 1152.8528850078583, {'accuracy': 0.098}, 10.2196028)
+[2025-01-06 15:07:27,203][flwr][INFO] - Sampling failed: number of available clients (2) is less than number of requested clients (25).
+[2025-01-06 15:07:27,203][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-06 15:07:27,204][flwr][INFO] - 
+[2025-01-06 15:07:27,204][flwr][INFO] - [ROUND 2]
+[2025-01-06 15:07:27,204][flwr][INFO] - Sampling failed: number of available clients (2) is less than number of requested clients (10).
+[2025-01-06 15:07:27,204][flwr][INFO] - configure_fit: no clients selected, cancel
+[2025-01-06 15:07:37,807][flwr][INFO] - fit progress: (2, 1152.8528850078583, {'accuracy': 0.098}, 20.8243361)
+[2025-01-06 15:07:37,807][flwr][INFO] - Sampling failed: number of available clients (2) is less than number of requested clients (25).
+[2025-01-06 15:07:37,808][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-06 15:07:37,808][flwr][INFO] - 
+[2025-01-06 15:07:37,809][flwr][INFO] - [SUMMARY]
+[2025-01-06 15:07:37,809][flwr][INFO] - Run finished 2 round(s) in 20.83s
+[2025-01-06 15:07:37,810][flwr][INFO] - 	History (loss, centralized):
+[2025-01-06 15:07:37,810][flwr][INFO] - 		round 0: 1152.8528850078583
+[2025-01-06 15:07:37,810][flwr][INFO] - 		round 1: 1152.8528850078583
+[2025-01-06 15:07:37,811][flwr][INFO] - 		round 2: 1152.8528850078583
+[2025-01-06 15:07:37,811][flwr][INFO] - 	History (metrics, centralized):
+[2025-01-06 15:07:37,811][flwr][INFO] - 	{'accuracy': [(0, 0.098), (1, 0.098), (2, 0.098)]}
+[2025-01-06 15:07:37,811][flwr][INFO] - 

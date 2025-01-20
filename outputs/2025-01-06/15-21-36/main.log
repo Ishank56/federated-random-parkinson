@@ -1,0 +1,1636 @@
+[2025-01-06 15:21:36,904][flwr][WARNING] - 
+Setting `min_available_clients` lower than `min_fit_clients` or
+`min_evaluate_clients` can cause the server to fail when there are too few clients
+connected to the server. `min_available_clients` must be set to a value larger
+than or equal to the values of `min_fit_clients` and `min_evaluate_clients`.
+
+[2025-01-06 15:21:36,905][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-01-06 15:21:36,909][flwr][INFO] - Starting Flower simulation, config: num_rounds=7, no round_timeout
+[2025-01-06 15:21:40,601][flwr][INFO] - Flower VCE: Ray initialized with resources: {'CPU': 12.0, 'memory': 1634360526.0, 'node:127.0.0.1': 1.0, 'accelerator_type:G': 1.0, 'object_store_memory': 817180262.0, 'node:__internal_head__': 1.0, 'GPU': 1.0}
+[2025-01-06 15:21:40,602][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-01-06 15:21:40,603][flwr][INFO] - No `client_resources` specified. Using minimal resources for clients.
+[2025-01-06 15:21:40,603][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2025-01-06 15:21:40,628][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 12 actors
+[2025-01-06 15:21:40,629][flwr][INFO] - [INIT]
+[2025-01-06 15:21:40,629][flwr][INFO] - Requesting initial parameters from one random client
+[2025-01-06 15:21:49,532][flwr][INFO] - Received initial parameters from one random client
+[2025-01-06 15:21:49,537][flwr][INFO] - Starting evaluation of initial global parameters
+[2025-01-06 15:21:58,140][flwr][INFO] - initial parameters (loss, other metrics): 1154.304491519928, {'accuracy': 0.10381666666666667}
+[2025-01-06 15:21:58,141][flwr][INFO] - 
+[2025-01-06 15:21:58,142][flwr][INFO] - [ROUND 1]
+[2025-01-06 15:21:58,148][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-06 15:22:42,751][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=19300, ip=127.0.0.1, actor_id=18349d321c33c47ad1a4cc8401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000025B3DAB4460>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19300, ip=127.0.0.1, actor_id=18349d321c33c47ad1a4cc8401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000025B3DAB4460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 23144) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19300, ip=127.0.0.1, actor_id=18349d321c33c47ad1a4cc8401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000025B3DAB4460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 23144) exited unexpectedly
+
+[2025-01-06 15:22:42,759][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 20900) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 20900) exited unexpectedly
+
+[2025-01-06 15:22:42,760][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=21372, ip=127.0.0.1, actor_id=f830fa17d1df213c026ffc6d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001D7700214F0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=21372, ip=127.0.0.1, actor_id=f830fa17d1df213c026ffc6d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001D7700214F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 10424) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=21372, ip=127.0.0.1, actor_id=f830fa17d1df213c026ffc6d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001D7700214F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 10424) exited unexpectedly
+
+[2025-01-06 15:22:42,820][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=19300, ip=127.0.0.1, actor_id=18349d321c33c47ad1a4cc8401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000025B3DAB4460>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19300, ip=127.0.0.1, actor_id=18349d321c33c47ad1a4cc8401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000025B3DAB4460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 23144) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=19300, ip=127.0.0.1, actor_id=18349d321c33c47ad1a4cc8401000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000025B3DAB4460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 23144) exited unexpectedly
+[2025-01-06 15:22:42,844][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 20900) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 20900) exited unexpectedly
+[2025-01-06 15:22:42,859][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=21372, ip=127.0.0.1, actor_id=f830fa17d1df213c026ffc6d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001D7700214F0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=21372, ip=127.0.0.1, actor_id=f830fa17d1df213c026ffc6d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001D7700214F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 10424) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=21372, ip=127.0.0.1, actor_id=f830fa17d1df213c026ffc6d01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001D7700214F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 10424) exited unexpectedly
+[2025-01-06 15:22:43,466][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 26452) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 26452) exited unexpectedly
+
+[2025-01-06 15:22:43,470][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 8260) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 8260) exited unexpectedly
+
+[2025-01-06 15:22:43,476][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 26452) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 26452) exited unexpectedly
+[2025-01-06 15:22:43,492][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 8260) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 8260) exited unexpectedly
+[2025-01-06 15:22:43,504][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 21500) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 21500) exited unexpectedly
+
+[2025-01-06 15:22:43,513][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 21500) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 21500) exited unexpectedly
+[2025-01-06 15:22:43,667][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 14972) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 14972) exited unexpectedly
+
+[2025-01-06 15:22:43,677][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 14972) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 14972) exited unexpectedly
+[2025-01-06 15:22:49,570][flwr][INFO] - aggregate_fit: received 3 results and 7 failures
+[2025-01-06 15:22:49,594][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2025-01-06 15:22:59,842][flwr][INFO] - fit progress: (1, 603.8156225681305, {'accuracy': 0.7844666666666666}, 61.7010089)
+[2025-01-06 15:22:59,844][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-06 15:22:59,845][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-06 15:22:59,846][flwr][INFO] - 
+[2025-01-06 15:22:59,846][flwr][INFO] - [ROUND 2]
+[2025-01-06 15:22:59,848][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-06 15:23:12,164][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=356, ip=127.0.0.1, actor_id=c78e925967a3cd36057e21be01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001F768C94490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=356, ip=127.0.0.1, actor_id=c78e925967a3cd36057e21be01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001F768C94490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 20836, 13616) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=356, ip=127.0.0.1, actor_id=c78e925967a3cd36057e21be01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001F768C94490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 20836, 13616) exited unexpectedly
+
+[2025-01-06 15:23:12,171][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=356, ip=127.0.0.1, actor_id=c78e925967a3cd36057e21be01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001F768C94490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=356, ip=127.0.0.1, actor_id=c78e925967a3cd36057e21be01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001F768C94490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 20836, 13616) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=356, ip=127.0.0.1, actor_id=c78e925967a3cd36057e21be01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001F768C94490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 20836, 13616) exited unexpectedly
+[2025-01-06 15:23:12,548][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 23812) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 23812) exited unexpectedly
+
+[2025-01-06 15:23:12,554][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 23812) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=10488, ip=127.0.0.1, actor_id=87675bbfd1792c1a164bfa4601000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002286EE744C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 23812) exited unexpectedly
+[2025-01-06 15:23:12,703][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 20064, 18984) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 20064, 18984) exited unexpectedly
+
+[2025-01-06 15:23:12,710][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 20064, 18984) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12620, ip=127.0.0.1, actor_id=9a1ede338030c65157af0f3f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001BCED2A44C0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 20064, 18984) exited unexpectedly
+[2025-01-06 15:23:13,108][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 5012, 20476) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 5012, 20476) exited unexpectedly
+
+[2025-01-06 15:23:13,121][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 5012, 20476) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=17404, ip=127.0.0.1, actor_id=d1380eda13d408ccacf5a85e01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001DDBF564430>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 5012, 20476) exited unexpectedly
+[2025-01-06 15:23:13,608][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 22464, 12956) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 22464, 12956) exited unexpectedly
+
+[2025-01-06 15:23:13,612][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 22464, 12956) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=12056, ip=127.0.0.1, actor_id=64f1a551707137252ada7ad301000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000014DB51E3490>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 22464, 12956) exited unexpectedly
+[2025-01-06 15:23:17,730][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3776, ip=127.0.0.1, actor_id=6020e3ffbe49c111fce15d8f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000221D36E4460>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3776, ip=127.0.0.1, actor_id=6020e3ffbe49c111fce15d8f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000221D36E4460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 11504) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3776, ip=127.0.0.1, actor_id=6020e3ffbe49c111fce15d8f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000221D36E4460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 11504) exited unexpectedly
+
+[2025-01-06 15:23:18,124][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 94, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 2755, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\worker.py", line 906, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 10248) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 10248) exited unexpectedly
+
+[2025-01-06 15:23:20,051][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3776, ip=127.0.0.1, actor_id=6020e3ffbe49c111fce15d8f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000221D36E4460>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3776, ip=127.0.0.1, actor_id=6020e3ffbe49c111fce15d8f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000221D36E4460>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 11504) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3776, ip=127.0.0.1, actor_id=6020e3ffbe49c111fce15d8f01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000221D36E4460>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 11504) exited unexpectedly
+[2025-01-06 15:23:20,067][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python39\lib\multiprocessing\queues.py", line 114, in get
+    raise Empty
+_queue.Empty
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 58, in run
+    out_message = app(message=message, context=context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 143, in __call__
+    return self._call(message, context)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client_app.py", line 126, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\message_handler\message_handler.py", line 128, in handle_legacy_message_from_msgtype
+    fit_res = maybe_call_fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\client.py", line 224, in maybe_call_fit
+    return client.fit(fit_ins)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\client\numpy_client.py", line 227, in _fit
+    results = self.numpy_client.fit(parameters, ins.config)  # type: ignore
+  File "D:\federated Parkinsons\client.py", line 59, in fit
+    train(self.model, self.trainloader, optim, epochs, self.device)
+  File "D:\federated Parkinsons\model.py", line 32, in train
+    for images, labels in trainloader:
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1412, in _get_data
+    success, data = self._try_get_data()
+  File "D:\federated Parkinsons\.venv\lib\site-packages\torch\utils\data\dataloader.py", line 1256, in _try_get_data
+    raise RuntimeError(
+RuntimeError: DataLoader worker (pid(s) 10248) exited unexpectedly
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=24132, ip=127.0.0.1, actor_id=10733aa818107c525444353801000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002DB711414F0>)
+  File "python\ray\_raylet.pyx", line 1873, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1974, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1879, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1820, in ray._raylet.execute_task.function_executor
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\_private\function_manager.py", line 696, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: DataLoader worker (pid(s) 10248) exited unexpectedly
