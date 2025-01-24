@@ -1,0 +1,100 @@
+[2025-01-22 15:31:01,248][flwr][WARNING] - 
+Setting `min_available_clients` lower than `min_fit_clients` or
+`min_evaluate_clients` can cause the server to fail when there are too few clients
+connected to the server. `min_available_clients` must be set to a value larger
+than or equal to the values of `min_fit_clients` and `min_evaluate_clients`.
+
+[2025-01-22 15:31:01,248][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-01-22 15:31:01,249][flwr][INFO] - Starting Flower simulation, config: num_rounds=7, no round_timeout
+[2025-01-22 15:31:03,600][flwr][INFO] - Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'node:10.40.177.142': 1.0, 'CPU': 16.0, 'accelerator_type:M4000': 1.0, 'object_store_memory': 8950029926.0, 'memory': 17900059854.0, 'GPU': 1.0}
+[2025-01-22 15:31:03,600][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-01-22 15:31:03,600][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 2, 'num_gpus': 0.5}
+[2025-01-22 15:31:03,618][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 2 actors
+[2025-01-22 15:31:03,618][flwr][INFO] - [INIT]
+[2025-01-22 15:31:03,619][flwr][INFO] - Requesting initial parameters from one random client
+[2025-01-22 15:31:10,908][flwr][INFO] - Received initial parameters from one random client
+[2025-01-22 15:31:10,909][flwr][INFO] - Starting evaluation of initial global parameters
+[2025-01-22 15:31:27,671][flwr][INFO] - initial parameters (loss, other metrics): 1153.9482295513153, {'accuracy': 0.12898333333333334}
+[2025-01-22 15:31:27,671][flwr][INFO] - 
+[2025-01-22 15:31:27,671][flwr][INFO] - [ROUND 1]
+[2025-01-22 15:31:27,672][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-22 15:31:58,819][flwr][INFO] - aggregate_fit: received 10 results and 0 failures
+[2025-01-22 15:31:58,836][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2025-01-22 15:32:15,440][flwr][INFO] - fit progress: (1, 808.2410796880722, {'accuracy': 0.67635}, 47.76894256299988)
+[2025-01-22 15:32:15,440][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-22 15:32:15,441][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-22 15:32:15,441][flwr][INFO] - 
+[2025-01-22 15:32:15,441][flwr][INFO] - [ROUND 2]
+[2025-01-22 15:32:15,441][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-22 15:32:42,060][flwr][INFO] - aggregate_fit: received 10 results and 0 failures
+[2025-01-22 15:32:58,179][flwr][INFO] - fit progress: (2, 109.18868708983064, {'accuracy': 0.9572833333333334}, 90.50756437299992)
+[2025-01-22 15:32:58,179][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-22 15:32:58,179][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-22 15:32:58,179][flwr][INFO] - 
+[2025-01-22 15:32:58,179][flwr][INFO] - [ROUND 3]
+[2025-01-22 15:32:58,180][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-22 15:33:25,321][flwr][INFO] - aggregate_fit: received 10 results and 0 failures
+[2025-01-22 15:33:41,387][flwr][INFO] - fit progress: (3, 95.89795550704002, {'accuracy': 0.9662}, 133.715955033)
+[2025-01-22 15:33:41,387][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-22 15:33:41,388][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-22 15:33:41,388][flwr][INFO] - 
+[2025-01-22 15:33:41,388][flwr][INFO] - [ROUND 4]
+[2025-01-22 15:33:41,388][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-22 15:34:08,124][flwr][INFO] - aggregate_fit: received 10 results and 0 failures
+[2025-01-22 15:34:24,628][flwr][INFO] - fit progress: (4, 64.11334152985364, {'accuracy': 0.9725333333333334}, 176.95635230900007)
+[2025-01-22 15:34:24,628][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-22 15:34:24,628][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-22 15:34:24,628][flwr][INFO] - 
+[2025-01-22 15:34:24,628][flwr][INFO] - [ROUND 5]
+[2025-01-22 15:34:24,629][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-22 15:34:51,469][flwr][INFO] - aggregate_fit: received 10 results and 0 failures
+[2025-01-22 15:35:07,837][flwr][INFO] - fit progress: (5, 54.7376647926867, {'accuracy': 0.9783}, 220.16622311599986)
+[2025-01-22 15:35:07,838][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-22 15:35:07,838][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-22 15:35:07,838][flwr][INFO] - 
+[2025-01-22 15:35:07,838][flwr][INFO] - [ROUND 6]
+[2025-01-22 15:35:07,838][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-22 15:35:34,499][flwr][INFO] - aggregate_fit: received 10 results and 0 failures
+[2025-01-22 15:35:50,644][flwr][INFO] - fit progress: (6, 47.663061395986006, {'accuracy': 0.9804333333333334}, 262.9731325129999)
+[2025-01-22 15:35:50,645][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-22 15:35:50,645][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-22 15:35:50,645][flwr][INFO] - 
+[2025-01-22 15:35:50,645][flwr][INFO] - [ROUND 7]
+[2025-01-22 15:35:50,645][flwr][INFO] - configure_fit: strategy sampled 10 clients (out of 10)
+[2025-01-22 15:36:17,353][flwr][INFO] - aggregate_fit: received 10 results and 0 failures
+[2025-01-22 15:36:33,423][flwr][INFO] - fit progress: (7, 34.922301392944064, {'accuracy': 0.9843833333333334}, 305.75193142800003)
+[2025-01-22 15:36:33,423][flwr][INFO] - Sampling failed: number of available clients (10) is less than number of requested clients (25).
+[2025-01-22 15:36:33,424][flwr][INFO] - configure_evaluate: no clients selected, skipping evaluation
+[2025-01-22 15:36:33,424][flwr][INFO] - 
+[2025-01-22 15:36:33,424][flwr][INFO] - [SUMMARY]
+[2025-01-22 15:36:33,424][flwr][INFO] - Run finished 7 round(s) in 305.75s
+[2025-01-22 15:36:33,424][flwr][INFO] - 	History (loss, centralized):
+[2025-01-22 15:36:33,424][flwr][INFO] - 		round 0: 1153.9482295513153
+[2025-01-22 15:36:33,424][flwr][INFO] - 		round 1: 808.2410796880722
+[2025-01-22 15:36:33,425][flwr][INFO] - 		round 2: 109.18868708983064
+[2025-01-22 15:36:33,425][flwr][INFO] - 		round 3: 95.89795550704002
+[2025-01-22 15:36:33,425][flwr][INFO] - 		round 4: 64.11334152985364
+[2025-01-22 15:36:33,425][flwr][INFO] - 		round 5: 54.7376647926867
+[2025-01-22 15:36:33,425][flwr][INFO] - 		round 6: 47.663061395986006
+[2025-01-22 15:36:33,425][flwr][INFO] - 		round 7: 34.922301392944064
+[2025-01-22 15:36:33,425][flwr][INFO] - 	History (metrics, centralized):
+[2025-01-22 15:36:33,425][flwr][INFO] - 	{'accuracy': [(0, 0.12898333333333334),
+[2025-01-22 15:36:33,425][flwr][INFO] - 	              (1, 0.67635),
+[2025-01-22 15:36:33,425][flwr][INFO] - 	              (2, 0.9572833333333334),
+[2025-01-22 15:36:33,425][flwr][INFO] - 	              (3, 0.9662),
+[2025-01-22 15:36:33,425][flwr][INFO] - 	              (4, 0.9725333333333334),
+[2025-01-22 15:36:33,426][flwr][INFO] - 	              (5, 0.9783),
+[2025-01-22 15:36:33,426][flwr][INFO] - 	              (6, 0.9804333333333334),
+[2025-01-22 15:36:33,426][flwr][INFO] - 	              (7, 0.9843833333333334)]}
+[2025-01-22 15:36:33,426][flwr][INFO] - 

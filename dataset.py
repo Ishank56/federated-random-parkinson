@@ -1,44 +1,49 @@
-import torch
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import tensorflow as tf
 
-from torchvision.datasets import MNIST
-from torchvision.transforms import ToTensor, Normalize,Compose
-from torch.utils.data import random_split, DataLoader
-def get_mnist(data_path: str='./data'):
-    
+def prepare_dataset(num_partitions, batch_size, data_path="/home/tt603/Desktop/federated_learning/Federated-Framework/Parkinsson disease.csv"):
+    data = pd.read_csv(data_path).drop(columns=['name'])
+    X = data.drop(columns=['status']).values
+    y = data['status'].values
 
-    tr=Compose((ToTensor(), Normalize((0.1307,), (0.3081))))
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
 
-    trainset=MNIST(data_path, train=True, download=True, transform=tr)
-    testset=MNIST(data_path, train=True, download=True, transform=tr)
+    partition_size = len(X_scaled) // num_partitions
+    trainloaders, valloaders = [], []
 
+    for i in range(num_partitions):
+        start_idx = i * partition_size
+        end_idx = start_idx + partition_size
+        X_partition = X_scaled[start_idx:end_idx]
+        y_partition = y[start_idx:end_idx]
 
+        if len(X_partition) < 2:  # Ensure enough samples in the partition
+            print(f"Skipping partition {i} due to insufficient samples.")
+            continue
 
-    return trainset, testset
-def prepare_dataset(num_partitions: int, batch_size: int, val_ratio: float = 0.1):
-    trainset, testset = get_mnist()
+        X_train, X_val, y_train, y_val = train_test_split(
+            X_partition, y_partition, test_size=0.1, random_state=42, stratify=y_partition
+        )
 
-    # Split trainset into 'num_partitions' trainsets
-    num_images = len(trainset) // num_partitions
-    partition_len = [num_images] * num_partitions
+        if len(X_train) == 0 or len(X_val) == 0:
+            print(f"Skipping partition {i} due to insufficient train/validation samples.")
+            continue
 
-    trainsets = random_split(trainset, partition_len, torch.Generator().manual_seed(2023))
+        X_train_cnn = X_train[..., np.newaxis]
+        X_val_cnn = X_val[..., np.newaxis]
 
-    # Initialize lists to store train and validation loaders
-    trainloaders = []
-    valloaders = []
+        trainloader = tf.data.Dataset.from_tensor_slices((X_train_cnn, y_train)).batch(batch_size)
+        valloader = tf.data.Dataset.from_tensor_slices((X_val_cnn, y_val)).batch(batch_size)
 
-    # Create dataloaders with train+val support
-    for trainset_ in trainsets:
-        num_total = len(trainset_)
-        num_val = int(val_ratio * num_total)
-        num_train = num_total - num_val
+        trainloaders.append(trainloader)
+        valloaders.append(valloader)
 
-        for_train, for_val = random_split(trainset_, [num_train, num_val], torch.Generator().manual_seed(2023))
-
-        trainloaders.append(DataLoader(for_train, batch_size=batch_size, shuffle=True, num_workers=2))
-        valloaders.append(DataLoader(for_val, batch_size=batch_size, shuffle=False, num_workers=2))
-
-    testloader = DataLoader(testset, batch_size=120)
+    X_test, _, y_test, _ = train_test_split(X_scaled, y, test_size=0.1, random_state=42, stratify=y)
+    X_test_cnn = X_test[..., np.newaxis]
+    testloader = tf.data.Dataset.from_tensor_slices((X_test_cnn, y_test)).batch(batch_size)
 
     return trainloaders, valloaders, testloader
-  

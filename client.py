@@ -1,13 +1,4 @@
-from collections import OrderedDict
-import torch
-import tensorflow as tf
-import flwr as fl
-from typing import Dict,Tuple
-from flwr.common import NDArrays, Scalar
-
-from model import Net, test, train
-
- # If Scalar is meant to be a numpy scalar
+# If Scalar is meant to be a numpy scalar
 
 
 # Corrected model definition
@@ -17,56 +8,35 @@ from model import Net, test, train
 # # Load CIFAR-10 dataset
 # (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 
+import tensorflow as tf
+import flwr as fl
+from typing import Dict
+from model import Net
+
 class FlowerClient(fl.client.NumPyClient):
-    def __init__(self,
-                trainloader,
-                valloader,
-                num_classes)-> None:
-        super().__init__()
+    def _init_(self, trainloader, valloader, input_shape):
+        super()._init_()
+        self.trainloader = trainloader
+        self.valloader = valloader
+        self.model = create_cnn_model(input_shape)
+        self.model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-        self.trainloader=trainloader
-        self.valloader=valloader
-
-        self.model=Net(num_classes)
-
-        self.device= torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
+    def get_parameters(self):
+        return [val.numpy() for val in self.model.trainable_weights]
 
     def set_parameters(self, parameters):
-
-        params_dict= zip(self.model.state_dict().keys(), parameters)
-
-        state_dict=OrderedDict({k: torch.Tensor(v) for k, v in params_dict})
-
-        self.model.load_state_dict(state_dict, strict=True)
-        # return model.get_weights()
-
-    def get_parameters(self, config: Dict[str, Scalar]):
-        return [val.cpu().numpy() for _, val in self.model.state_dict().items()]
+        for var, param in zip(self.model.trainable_weights, parameters):
+            var.assign(param)
 
     def fit(self, parameters, config):
-
-        #copy parameters sent by the server into client's local model
         self.set_parameters(parameters)
+        self.model.fit(self.trainloader, epochs=config['local_epochs'])
+        return self.get_parameters(), len(self.trainloader), {}
 
-        lr=config['lr']
-        momentum=config['momentum']
-        epochs=config['local_epochs']
-
-        optim=torch.optim.SGD(self.model.parameters(), lr=lr ,momentum=momentum)
-
-        #Do local training
-        train(self.model, self.trainloader, optim, epochs, self.device)
-
-        return self.get_parameters({}), len(self.trainloader), {}
-
-    def evaluate(self, parameters:NDArrays, config:Dict[str, Scalar]):
-
+    def evaluate(self, parameters, config):
         self.set_parameters(parameters)
-
-        loss, accuracy= test(self.model, self.valloader, self.device)
-
-        return float(loss), len(self.valloader), {'accuracy':accuracy}
+        loss, accuracy = self.model.evaluate(self.valloader)
+        return loss, len(self.valloader), {"accuracy": accuracy}
 
 
 def generate_client_fn(trainloaders, valloaders, num_classes):
