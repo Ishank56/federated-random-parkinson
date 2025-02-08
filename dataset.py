@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import torch
 from torch.utils.data import DataLoader, TensorDataset
+import numpy as np
 
 def prepare_dataset(batch_size=32):
     # Load the dataset

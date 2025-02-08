@@ -1,0 +1,59 @@
+[2025-02-08 15:12:45,543][flwr][WARNING] - 
+Setting `min_available_clients` lower than `min_fit_clients` or
+`min_evaluate_clients` can cause the server to fail when there are too few clients
+connected to the server. `min_available_clients` must be set to a value larger
+than or equal to the values of `min_fit_clients` and `min_evaluate_clients`.
+
+[2025-02-08 15:12:45,544][flwr][WARNING] - DEPRECATED FEATURE: flwr.simulation.start_simulation() is deprecated.
+	Instead, use the `flwr run` CLI command to start a local simulation in your Flower app, as shown for example below:
+
+		$ flwr new  # Create a new Flower app from a template
+
+		$ flwr run  # Run the Flower app in Simulation Mode
+
+	Using `start_simulation()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[2025-02-08 15:12:45,547][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2025-02-08 15:12:50,418][flwr][INFO] - Flower VCE: Ray initialized with resources: {'node:127.0.0.1': 1.0, 'memory': 895908251.0, 'accelerator_type:G': 1.0, 'object_store_memory': 447954124.0, 'CPU': 12.0, 'node:__internal_head__': 1.0, 'GPU': 1.0}
+[2025-02-08 15:12:50,419][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2025-02-08 15:12:50,419][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 2, 'num_gpus': 0.5}
+[2025-02-08 15:12:50,430][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 2 actors
+[2025-02-08 15:12:50,430][flwr][INFO] - [INIT]
+[2025-02-08 15:12:50,431][flwr][INFO] - Requesting initial parameters from one random client
+[2025-02-08 15:12:55,608][flwr][INFO] - Received initial parameters from one random client
+[2025-02-08 15:12:55,609][flwr][INFO] - Starting evaluation of initial global parameters
+[2025-02-08 15:12:55,623][flwr][ERROR] - This RandomForestClassifier instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+[2025-02-08 15:12:55,659][flwr][ERROR] - Traceback (most recent call last):
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\simulation\legacy_app.py", line 359, in start_simulation
+    hist = run_fl(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\server\server.py", line 492, in run_fl
+    hist, elapsed_time = server.fit(
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\server\server.py", line 95, in fit
+    res = self.strategy.evaluate(0, parameters=self.parameters)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\flwr\server\strategy\fedavg.py", line 167, in evaluate
+    eval_res = self.evaluate_fn(server_round, parameters_ndarrays, {})
+  File "D:\federated Parkinsons\server.py", line 28, in evaluate_fn
+    predictions = model.predict(X_test)
+  File "D:\federated Parkinsons\model.py", line 13, in predict
+    return self.model.predict(X)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\sklearn\ensemble\_forest.py", line 904, in predict
+    proba = self.predict_proba(X)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\sklearn\ensemble\_forest.py", line 944, in predict_proba
+    check_is_fitted(self)
+  File "D:\federated Parkinsons\.venv\lib\site-packages\sklearn\utils\validation.py", line 1757, in check_is_fitted
+    raise NotFittedError(msg % {"name": type(estimator).__name__})
+sklearn.exceptions.NotFittedError: This RandomForestClassifier instance is not fitted yet. Call 'fit' with appropriate arguments before using this estimator.
+
+[2025-02-08 15:12:55,662][flwr][ERROR] - Your simulation crashed :(. This could be because of several reasons. The most common are: 
+	 > Sometimes, issues in the simulation code itself can cause crashes. It's always a good idea to double-check your code for any potential bugs or inconsistencies that might be contributing to the problem. For example: 
+		 - You might be using a class attribute in your clients that hasn't been defined.
+		 - There could be an incorrect method call to a 3rd party library (e.g., PyTorch).
+		 - The return types of methods in your clients/strategies might be incorrect.
+	 > Your system couldn't fit a single VirtualClient: try lowering `client_resources`.
+	 > All the actors in your pool crashed. This could be because: 
+		 - You clients hit an out-of-memory (OOM) error and actors couldn't recover from it. Try launching your simulation with more generous `client_resources` setting (i.e. it seems {'num_cpus': 2, 'num_gpus': 0.5} is not enough for your run). Use fewer concurrent actors. 
+		 - You were running a multi-node simulation and all worker nodes disconnected. The head node might still be alive but cannot accommodate any actor with resources: {'num_cpus': 2, 'num_gpus': 0.5}.
+Take a look at the Flower simulation examples for guidance <https://flower.ai/docs/framework/how-to-run-simulations.html>.
